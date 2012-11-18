@@ -1,0 +1,144 @@
+set nocompatible
+
+call pathogen#infect()
+call pathogen#runtime_append_all_bundles()
+
+let mapleader="§"
+
+set hidden      " Hides buffers instead of closing
+set nowrap      " don't wrap lines
+set tabstop=4
+set backspace=indent,eol,start
+set autoindent
+set copyindent
+set shiftwidth=4
+set showmatch
+set ignorecase
+set smartcase
+set smarttab
+set hlsearch
+set incsearch
+set history=1000
+set undolevels=1000
+set wildignore=*.swp,*.bal,*.pyc,*.class
+set title
+set visualbell
+set noerrorbells
+"set nowritebackup
+set nobackup
+set noswapfile
+filetype plugin indent on
+"set expandtab
+syntax on
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:. " default listchars=eol:$
+if has('autocmd')
+    autocmd filetype python,perl set expandtab
+    autocmd filetype html,xml set listchars-=tab:>.
+endif
+set pastetoggle=<F2>
+set ruler
+set complete-=i
+set relativenumber
+
+" To avoid "Hit ENTER to continue"
+set shortmess=at
+set cmdheight=2
+
+nnoremap j gj
+nnoremap k gk
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+nmap <silent> <C-n> :set invrelativenumber<CR>
+
+nmap <silent> <Leader>h :nohlsearch<CR>
+
+"set bg=dark
+
+if has("gui_running")
+"    set guifont=Monaco:h12
+    set guifont=Source\ Code\ Pro:h12
+    set stal=2
+    set toolbar=
+    set guioptions-=T
+    set columns=84
+endif
+
+colorscheme default
+
+"
+" BMS maps
+"
+nnoremap <M-Space> :NERDTreeToggle<cr>
+nnoremap <silent> <Leader>qs :call QuoteWord("'")<CR>
+nnoremap <silent> <Leader>qd :call QuoteWord('"')<CR>
+nnoremap <silent> <Leader>q( :call QuoteWord('()')<CR>
+nnoremap <silent> <Leader>q[ :call QuoteWord('[]')<CR>
+nnoremap <silent> <Leader>q{ :call QuoteWord('{}')<CR>
+nnoremap <silent> _t mt:%!perltidy -q<cr>'tzz
+vnoremap <silent> _t :!perltidy -q<cr>
+
+nnoremap ç <C-]>
+nnoremap Ç <C-O>
+
+function! LoadVimpyre()
+python << EOF
+import os
+import subprocess
+import vim
+
+try:
+    subprocess.check_call(['which', 'vimpyre'],
+                          stdout=open(os.devnull, "w"))
+    vim.command('call pathogen#runtime_append_all_bundles("vimpyre")')
+    if vim.eval('has("gui_running")'):
+        vim.command('colorscheme solarized')
+except subprocess.CalledProcessError:
+    print "Vimpyre not found"
+vim.command("return 1")
+EOF
+endfunction
+
+function! QuoteWord(delimiter)
+python << EOF
+import re
+import vim
+delimiter = vim.eval("a:delimiter")
+if len(delimiter) == 2:
+    start = delimiter[0]
+    end = delimiter[1]
+else:
+    start = end = delimiter
+cw = vim.current.window
+cb = vim.current.buffer
+(row, col) = cw.cursor
+line = cb[row-1]
+
+line_1 = line[:col]
+line_2 = line[col:]
+newline = ''
+
+mo = re.search(r'^(.*\b)(\w+)$', line_1)
+if mo is not None:
+    newline = mo.group(1) + start + mo.group(2)
+elif len(line_1) > 0:
+    newline = line_1 + start
+else:
+    newline = '%s' % start
+
+mo = re.search(r'^(\w+)(\b.*)$', line_2)
+if mo is not None:
+    newline += mo.group(1) + end + mo.group(2)
+
+cb[row-1] = newline
+
+vim.command("return 1")
+EOF
+endfunction
+
+call LoadVimpyre()
+let g:bufExplorerSortBy='fullpath'
+let g:bufExplorerSplitOutPathName=0
+let g:bufExplorerShowRelativePath=1

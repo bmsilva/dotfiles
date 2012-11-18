@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/bms'
+let g:netrw_dirhist_2='/Users/bms/.ssh'
+let g:netrw_dirhist_3='/Volumes/sloth/Lab/gitolite-admin/conf'
+let g:netrw_dirhist_4='/Volumes/sloth/Lab/projects/fluxgo/fluxgo/src/fluxgo/www'
+let g:netrw_dirhist_5='/Volumes/sloth/Lab/projects/fluxgo/fluxgo/src/fluxgo'
+let g:netrw_dirhist_6='/Volumes/sloth/Lab/projects/fluxgo/fluxgo/src/fluxgo/accounts'
+let g:netrw_dirhist_7='/Users/bms/.virtualenvs/sys/lib/python2.7/site-packages/django/forms'
+let g:netrw_dirhist_8='/Volumes/sloth/Lab/Software/bootstrap/less'
