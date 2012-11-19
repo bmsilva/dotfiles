@@ -35,4 +35,5 @@ nosetests.xml
 .pydevproject
 
 # Dotfiles
-vim/vim/.netrwhist
+/vim/vim/.netrwhist
+/vim/vim/vimpyre/*
