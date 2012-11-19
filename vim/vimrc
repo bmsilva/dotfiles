@@ -56,8 +56,6 @@ nmap <silent> <C-n> :set invrelativenumber<CR>
 nmap <silent> <Leader>h :nohlsearch<CR>
 nmap <silent> <Leader>b :BufExplorer<CR>
 
-set bg=dark
-
 if has("gui_running")
 "    set guifont=Monaco:h12
     set guifont=Source\ Code\ Pro:h12
@@ -68,6 +66,7 @@ if has("gui_running")
 endif
 
 colorscheme default
+set bg=dark
 
 "
 " BMS maps

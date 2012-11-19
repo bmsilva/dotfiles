@@ -10,3 +10,6 @@ vimpyre list_installed
 * altercation/vim-colors-solarized
 * nvie/vim-flake8
 * jistr/vim-nerdtree-tabs
+
+Perl command to install bundle list:
+    cat README.md | perl -ne '/\* (.*)$/ && print qq{vimpyre install $1\n};'
