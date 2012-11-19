@@ -54,8 +54,9 @@ map <C-l> <C-w>l
 nmap <silent> <C-n> :set invrelativenumber<CR>
 
 nmap <silent> <Leader>h :nohlsearch<CR>
+nmap <silent> <Leader>b :BufExplorer<CR>
 
-"set bg=dark
+set bg=dark
 
 if has("gui_running")
 "    set guifont=Monaco:h12
@@ -77,8 +78,15 @@ nnoremap <silent> <Leader>qd :call QuoteWord('"')<CR>
 nnoremap <silent> <Leader>q( :call QuoteWord('()')<CR>
 nnoremap <silent> <Leader>q[ :call QuoteWord('[]')<CR>
 nnoremap <silent> <Leader>q{ :call QuoteWord('{}')<CR>
-nnoremap <silent> _t mt:%!perltidy -q<cr>'tzz
-vnoremap <silent> _t :!perltidy -q<cr>
+vnoremap <silent> <Leader>qs di'<ESC>pa'<ESC>
+vnoremap <silent> <Leader>qd di"<ESC>pa"<ESC>
+vnoremap <silent> <Leader>q( di(<ESC>pa)<ESC>
+vnoremap <silent> <Leader>q[ di[<ESC>pa]<ESC>
+vnoremap <silent> <Leader>q{ di{<ESC>pa}<ESC>
+nnoremap <silent> _t mt:%!perltidy -q<CR>'tzz
+vnoremap <silent> _t :!perltidy -q<CR>
+" set compiler to perlcritic; make for current file; open error window
+nnoremap <silent>_pc :compiler perlcritic<CR>:make<CR>:cope<CR><CR>
 
 nnoremap ç <C-]>
 nnoremap Ç <C-O>
