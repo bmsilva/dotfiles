@@ -13,5 +13,5 @@ vimpyre list_installed
 
 Perl command to install bundle list:
 
-    cat README.md | perl -ne '/\* (.*)$/ && print qq{vimpyre install $1\n};'
+    cat README.md | perl -ne '/\* ([\w\/\-\.]+)$/ && print qq{vimpyre install $1\n};'
 
