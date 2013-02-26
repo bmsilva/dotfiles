@@ -7,3 +7,6 @@
 [submodule "vim/vim/bundle/ack.vim"]
 	path = vim/vim/bundle/ack.vim
 	url = git://github.com/vim-scripts/ack.vim.git
+[submodule "vim/vim/bundle/fugitive.vim"]
+	path = vim/vim/bundle/fugitive.vim
+	url = git://github.com/vim-scripts/fugitive.vim.git
