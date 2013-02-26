@@ -10,3 +10,6 @@
 [submodule "vim/vim/bundle/fugitive.vim"]
 	path = vim/vim/bundle/fugitive.vim
 	url = git://github.com/vim-scripts/fugitive.vim.git
+[submodule "vim/vim/bundle/DrawIt.git"]
+	path = vim/vim/bundle/DrawIt.git
+	url = git://github.com/vim-scripts/DrawIt.git
