@@ -4,3 +4,6 @@
 [submodule "vim/vim/bundle/bufexplorer.zip"]
 	path = vim/vim/bundle/bufexplorer.zip
 	url = git://github.com/vim-scripts/bufexplorer.zip.git
+[submodule "vim/vim/bundle/ack.vim"]
+	path = vim/vim/bundle/ack.vim
+	url = git://github.com/vim-scripts/ack.vim.git
