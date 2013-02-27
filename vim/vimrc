@@ -63,6 +63,7 @@ if has("gui_running")
     set toolbar=
     set guioptions-=T
     set columns=84
+    colorscheme solarized
 endif
 
 colorscheme default
@@ -89,24 +90,6 @@ nnoremap <silent>_pc :compiler perlcritic<CR>:make<CR>:cope<CR><CR>
 
 nnoremap ç <C-]>
 nnoremap Ç <C-O>
-
-function! LoadVimpyre()
-python << EOF
-import os
-import subprocess
-import vim
-
-try:
-    subprocess.check_call(['which', 'vimpyre'],
-                          stdout=open(os.devnull, "w"))
-    vim.command('call pathogen#runtime_append_all_bundles("vimpyre")')
-    if vim.eval('has("gui_running")'):
-        vim.command('colorscheme solarized')
-except subprocess.CalledProcessError:
-    print "Vimpyre not found"
-vim.command("return 1")
-EOF
-endfunction
 
 function! QuoteWord(delimiter)
 python << EOF
@@ -145,7 +128,6 @@ vim.command("return 1")
 EOF
 endfunction
 
-call LoadVimpyre()
 let g:bufExplorerSortBy='fullpath'
 let g:bufExplorerSplitOutPathName=0
 let g:bufExplorerShowRelativePath=1
