@@ -65,7 +65,7 @@ if has("gui_running")
 "    set columns=84
 endif
 
-colorscheme default
+colorscheme solarized
 set bg=dark
 
 "
