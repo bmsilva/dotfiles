@@ -13,3 +13,6 @@
 [submodule "vim/vim/bundle/DrawIt.git"]
 	path = vim/vim/bundle/DrawIt.git
 	url = git://github.com/vim-scripts/DrawIt.git
+[submodule "vim/vim/bundle/UltiSnips"]
+	path = vim/vim/bundle/UltiSnips
+	url = git://github.com/vim-scripts/UltiSnips.git
