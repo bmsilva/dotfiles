@@ -24,7 +24,7 @@ set wildignore=*.swp,*.bal,*.pyc,*.class
 set title
 set visualbell
 set noerrorbells
-"set nowritebackup
+set nowritebackup
 set nobackup
 set noswapfile
 filetype plugin indent on
@@ -62,8 +62,7 @@ if has("gui_running")
     set stal=2
     set toolbar=
     set guioptions-=T
-    set columns=84
-    colorscheme solarized
+"    set columns=84
 endif
 
 colorscheme default
