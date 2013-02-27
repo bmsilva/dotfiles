@@ -54,3 +54,5 @@ alias gitpretty="git log --pretty=format:'%h : %Cblue%aN%Creset : %Cred%d%Creset
 alias vi='mvim -v'
 alias vim='mvim -v'
 alias aws_bmsilva='envdir ~/Lab/AWS/bmsilva/botoenv ~/.virtualenvs/sys/bin/python ~/Lab/AWS/bmsilva/aws.py'
+
+source ~/perl5/perlbrew/etc/bashrc
