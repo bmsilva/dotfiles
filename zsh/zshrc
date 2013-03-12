@@ -53,6 +53,7 @@ alias resetterminal='echo -n -e "\033]0;\007"'
 alias gitpretty="git log --pretty=format:'%h : %Cblue%aN%Creset : %Cred%d%Creset : %s' --graph"
 alias vi='mvim -v'
 alias vim='mvim -v'
+alias sudovi='sudo vi -u NONE'
 alias aws_bmsilva='envdir ~/Lab/AWS/bmsilva/botoenv ~/.virtualenvs/sys/bin/python ~/Lab/AWS/bmsilva/aws.py'
 
 source ~/perl5/perlbrew/etc/bashrc
