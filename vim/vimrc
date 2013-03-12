@@ -130,3 +130,6 @@ endfunction
 let g:bufExplorerSortBy='fullpath'
 let g:bufExplorerSplitOutPathName=0
 let g:bufExplorerShowRelativePath=1
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_map = '<c-t>'
+let g:ctrlp_cmd = 'CtrlP'
