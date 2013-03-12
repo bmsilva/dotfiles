@@ -25,3 +25,6 @@
 [submodule "vim/vim/bundle/vim-flake8"]
 	path = vim/vim/bundle/vim-flake8
 	url = git://github.com/nvie/vim-flake8.git
+[submodule "vim/vim/bundle/ctrlp.vim"]
+	path = vim/vim/bundle/ctrlp.vim
+	url = git://github.com/vim-scripts/ctrlp.vim.git
