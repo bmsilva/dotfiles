@@ -28,6 +28,3 @@
 [submodule "vim/vim/bundle/ctrlp.vim"]
 	path = vim/vim/bundle/ctrlp.vim
 	url = git://github.com/vim-scripts/ctrlp.vim.git
-[submodule "vim/vim/bundle/vimwiki"]
-	path = vim/vim/bundle/vimwiki
-	url = git://github.com/vim-scripts/vimwiki.git
