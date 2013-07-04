@@ -1,0 +1,12 @@
+function parse_git_branch {
+    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+if [ -f $HOME/.srv_name ]; then
+    SRV_NAME=`cat $HOME/.srv_name`
+    PS1='\u@\h($SRV_NAME):\W $(parse_git_branch)\n\$ '
+else
+    PS1='\u@\h:\W $(parse_git_branch)\n\$ '
+fi
+
+export PS1
