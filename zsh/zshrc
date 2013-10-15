@@ -35,25 +35,17 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export EDITOR='vi'
-export PATH=/usr/local/share/npm/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$HOME/Applications/bin:$PATH
 export WORKON_HOME=$HOME/.virtualenvs
 export LC_CTYPE="en_US.UTF-8"
-
-if [[ -r /usr/local/share/python/virtualenvwrapper.sh ]]; then
-    source /usr/local/share/python/virtualenvwrapper.sh
-else
-    echo "WARNING: Can't find virtualenvwrapper.sh"
-fi
+export LANG="en_US"
 
 alias tmux='tmux -u'
-alias t='tmux.py'
-alias reKill='reKill.py'
 alias pysmtp='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias resetterminal='echo -n -e "\033]0;\007"'
 alias gitpretty="git log --pretty=format:'%h : %Cblue%aN%Creset : %Cred%d%Creset : %s' --graph"
-alias vi='mvim -v'
-alias vim='mvim -v'
-alias sudovi='sudo vi -u NONE'
-alias aws_bmsilva='envdir ~/Lab/AWS/bmsilva/botoenv ~/.virtualenvs/sys/bin/python ~/Lab/AWS/bmsilva/aws.py'
 
-source ~/perl5/perlbrew/etc/bashrc
+if [[ -r $HOME/.`hostname -s`_zshrc ]]; then
+    source $HOME/.`hostname -s`_zshrc
+else
+    echo "WARNING: Can't find custom zshrc"
+fi

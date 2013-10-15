@@ -4,24 +4,22 @@
 
 #export PS1='\u@\h:\W $(parse_git_branch)\n\$ '
 export EDITOR='vi'
-export PATH=/usr/local/share/npm/bin:/usr/local/share/python:/usr/local/bin:$HOME/Applications/bin:$PATH
 export WORKON_HOME=$HOME/.virtualenvs
 export LC_CTYPE="en_US.UTF-8"
+export LANG="en_US"
 
-alias ls='ls -G'
-alias ll='ls -l'
+alias tmux='tmux -u'
 alias t='tmux.py'
 alias reKill='reKill.py'
 alias pysmtp='python -m smtpd -n -c DebuggingServer localhost:1025'
 alias resetterminal='echo -n -e "\033]0;\007"'
 alias gitpretty="git log --pretty=format:'%h : %Cblue%aN%Creset : %Cred%d%Creset : %s' --graph"
-alias pynotebook="envdir ~/Lab/AWS/bmsilva/botoenv ~/.virtualenvs/sys/bin/ipython notebook"
 
-alias vi='mvim -v'
-alias vim='mvim -v'
+alias ls='ls -G'
+alias ll='ls -lG'
 
-if [[ -r /usr/local/share/python/virtualenvwrapper.sh ]]; then
-    source /usr/local/share/python/virtualenvwrapper.sh
+if [[ -r $HOME/.`hostname -s`_bash_profile ]]; then
+    source $HOME/.`hostname -s`_bash_profile
 else
-    echo "WARNING: Can't find virtualenvwrapper.sh"
+    echo "WARNING: Can't find custom bash_profile"
 fi
