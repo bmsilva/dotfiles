@@ -14,7 +14,7 @@ alias ls='ls -G'
 alias ll='ls -lG'
 
 if [[ -r $HOME/.host_nickname ]]; then
-    HOST_NICKNAME=`cat .host_nickname`
+    HOST_NICKNAME=`cat ${HOME}/.host_nickname`
 else
     HOST_NICKNAME=`hostname -s`
 fi
