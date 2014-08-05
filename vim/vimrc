@@ -2,6 +2,7 @@ set nocompatible
 
 call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
+Helptags
 
 let mapleader="§"
 
@@ -51,7 +52,8 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-nmap <silent> <C-n> :set invrelativenumber<CR>
+"nmap <silent> <C-n> :set invrelativenumber<CR>
+nmap <silent> <C-n> :call SideNumberSwitch()<CR>
 
 nmap <silent> <Leader>h :nohlsearch<CR>
 nmap <silent> <Leader>b :BufExplorer<CR>
@@ -125,6 +127,24 @@ if mo is not None:
 
 cb[row-1] = newline
 
+vim.command("return 1")
+EOF
+endfunction
+
+function! SideNumberSwitch()
+python << EOF
+import vim
+cw = vim.current.window
+relative = cw.options['relativenumber']
+number = cw.options['number']
+if relative:
+    cw.options['relativenumber'] = False
+    cw.options['number'] = True
+elif number:
+    cw.options['number'] = False
+else:
+    cw.options['relativenumber'] = True
+    cw.options['number'] = False
 vim.command("return 1")
 EOF
 endfunction
