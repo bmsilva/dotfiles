@@ -1,7 +1,7 @@
 export EDITOR='vi'
 export WORKON_HOME=$HOME/.virtualenvs
 export LC_CTYPE="en_US.UTF-8"
-export LANG="en_US"
+export LANG="en_US.UTF-8"
 
 alias tmux='tmux -u'
 alias t='tmux.py'
@@ -14,7 +14,7 @@ alias ls='ls -G'
 alias ll='ls -lG'
 
 if [[ -r $HOME/.host_nickname ]]; then
-    HOST_NICKNAME=`cat .host_nickname`
+    HOST_NICKNAME=`cat ${HOME}/.host_nickname`
 else
     HOST_NICKNAME=`hostname -s`
 fi
