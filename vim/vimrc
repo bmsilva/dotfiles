@@ -1,208 +1,91 @@
-set nocompatible
+call plug#begin('~/.vim/plugged')
 
-call pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-Helptags
+Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-perl/vim-perl'
+Plug 'nvie/vim-flake8'
+Plug 'tpope/vim-surround'
+Plug 'mileszs/ack.vim'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 
-"let mapleader="§"
+" On-demand
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'bufexplorer.zip', { 'on':  'BufExplorer' }
+Plug 'kien/ctrlp.vim', { 'on':  'CtrlP' }
+
+call plug#end()
+
+" BMS =========================================================================
 
 set hidden      " Hides buffers instead of closing
 set nowrap      " don't wrap lines
 set tabstop=4
-set backspace=indent,eol,start
-set autoindent
-set copyindent
+set backspace=indent,eol,start  " Prevent weird characters when hit backspace
+set autoindent  " copy indent from current line when starting new line
+set copyindent  " copy the structure of existing lines indent when autoindenting
 set shiftwidth=4
+set expandtab
 set showmatch
-set ignorecase
-set smartcase
-set smarttab
+
+set ignorecase  " Ignore case in patter match
+set smartcase   " Cancel Ignore case if pattern contains upper case char
+set smarttab    " When using backspace delete's de blanks according to settings
+
 set hlsearch
 set incsearch
 set history=1000
 set undolevels=1000
-set wildignore=*.swp,*.bal,*.pyc,*.class
-set title
+set wildignore=*.swp,*.bal,*.pyc,*.class " ignore this files when autocomplete
+
+set title   " set terminal window title
+
 set visualbell
-set noerrorbells
+set noerrorbells    " no bells on errors
+
 set nowritebackup
 set nobackup
 set noswapfile
-filetype plugin indent on
-"set expandtab
-syntax on
-set list
-set listchars=tab:>.,trail:.,extends:#,nbsp:. " default listchars=eol:$
-if has('autocmd')
-    autocmd filetype python,perl set expandtab
-    "autocmd filetype html,xml set listchars-=tab:>.
-endif
+
 set pastetoggle=<F2>
 set ruler
+
+" When calculating completion, C-n, don't process include files
 set complete-=i
-set relativenumber
 
 " To avoid "Hit ENTER to continue"
 set shortmess=at
 set cmdheight=2
 
-nnoremap j gj
-nnoremap k gk
+" Toggle column numbers
+set relativenumber
+nmap <silent> <C-n> :set invrelativenumber<CR>
+
+nmap <silent> <Leader>h :nohlsearch<CR>
+nmap <silent> <Leader>b :BufExplorer<CR>
+
+iabbrev ipdb import ipdb; ipdb.set_trace()
+
+nnoremap <M-Space> :NERDTreeToggle<cr>
+
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-"nmap <silent> <C-n> :set invrelativenumber<CR>
-nmap <silent> <C-n> :call SideNumberSwitch()<CR>
 
-nmap <silent> <Leader>h :nohlsearch<CR>
-nmap <silent> <Leader>b :BufExplorer<CR>
-nmap <silent> <Leader>p iimport pdb; pdb.set_trace()<ESC>
-
-if has("gui_running")
-"    set guifont=Monaco:h12
-    set guifont=Source\ Code\ Pro:h12
-    set stal=2
-    set toolbar=
-    set guioptions-=T
-    set guioptions-=r
-    set guioptions-=L
-"    set columns=84
-    colorscheme solarized
-    set bg=dark
-endif
-
-
-"
-" BMS maps
-"
-inoremap <silent> <C-d><C-d> import pdb; pdb.set_trace()
-nnoremap <M-Space> :NERDTreeToggle<cr>
-nnoremap <silent> <Leader>qs :call QuoteWord("'")<CR>
-nnoremap <silent> <Leader>qd :call QuoteWord('"')<CR>
-nnoremap <silent> <Leader>q( :call QuoteWord('()')<CR>
-nnoremap <silent> <Leader>q[ :call QuoteWord('[]')<CR>
-nnoremap <silent> <Leader>q{ :call QuoteWord('{}')<CR>
 vnoremap <silent> <Leader>qs di'<ESC>pa'<ESC>
 vnoremap <silent> <Leader>qd di"<ESC>pa"<ESC>
 vnoremap <silent> <Leader>q( di(<ESC>pa)<ESC>
 vnoremap <silent> <Leader>q[ di[<ESC>pa]<ESC>
+
 vnoremap <silent> <Leader>q{ di{<ESC>pa}<ESC>
-nnoremap <silent> _t mt:%!perltidy -q<CR>'tzz
-vnoremap <silent> _t :!perltidy -q<CR>
-" set compiler to perlcritic; make for current file; open error window
-nnoremap <silent>_pc :compiler perlcritic<CR>:make<CR>:cope<CR><CR>
 
-nnoremap ç <C-]>
-nnoremap Ç <C-O>
+set bg=light
+colorscheme solarized
 
-function! QuoteWord(delimiter)
-python << EOF
-import re
-import vim
-delimiter = vim.eval("a:delimiter")
-if len(delimiter) == 2:
-    start = delimiter[0]
-    end = delimiter[1]
-else:
-    start = end = delimiter
-cw = vim.current.window
-cb = vim.current.buffer
-(row, col) = cw.cursor
-line = cb[row-1]
-
-line_1 = line[:col]
-line_2 = line[col:]
-newline = ''
-
-mo = re.search(r'^(.*\b)(\w+)$', line_1)
-if mo is not None:
-    newline = mo.group(1) + start + mo.group(2)
-elif len(line_1) > 0:
-    newline = line_1 + start
-else:
-    newline = '%s' % start
-
-mo = re.search(r'^(\w+)(\b.*)$', line_2)
-if mo is not None:
-    newline += mo.group(1) + end + mo.group(2)
-
-cb[row-1] = newline
-
-vim.command("return 1")
-EOF
-endfunction
-
-function! SideNumberSwitch()
-python << EOF
-import vim
-cw = vim.current.window
-relative = cw.options['relativenumber']
-number = cw.options['number']
-if relative:
-    cw.options['relativenumber'] = False
-    cw.options['number'] = True
-elif number:
-    cw.options['number'] = False
-else:
-    cw.options['relativenumber'] = True
-    cw.options['number'] = False
-vim.command("return 1")
-EOF
-endfunction
+let g:ctrlp_map = '<F3>'
+let g:ctrlp_cmd = 'CtrlP'
 
 let g:bufExplorerSortBy='fullpath'
 let g:bufExplorerSplitOutPathName=0
 let g:bufExplorerShowRelativePath=1
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<F3>'
-let g:ctrlp_cmd = 'CtrlP'
-
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
-
-"
-" Put Tab numbers on tabline
-" http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
-"
-if exists("+showtabline")
-     function MyTabLine()
-         let s = ''
-         let t = tabpagenr()
-         let i = 1
-         while i <= tabpagenr('$')
-             let buflist = tabpagebuflist(i)
-             let winnr = tabpagewinnr(i)
-             let s .= '%' . i . 'T'
-             let s .= (i == t ? '%1*' : '%2')
-             let s .= ' '
-             let s .= i . ')'
-             "let s .= ' %*'
-             let s .= (i == t ? ' %*' : ' ') " Added by BMS
-             let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-             let file = bufname(buflist[winnr - 1])
-             let file = fnamemodify(file, ':p:t')
-             if file == ''
-                 let file = '[No Name]'
-             endif
-             let s .= file
-             let s .= ' %*' " Added by BMS
-             let i = i + 1
-         endwhile
-         let s .= '%T%#TabLineFill#%='
-         let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
-         return s
-     endfunction
-     set stal=2
-     set tabline=%!MyTabLine()
-endif
-
-set tabstop=4
