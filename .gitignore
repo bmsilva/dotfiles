@@ -36,4 +36,4 @@ nosetests.xml
 
 # Dotfiles
 /vim/vim/.netrwhist
-/vim/vim/vimpyre/*
+/vim/vim/plugged/
