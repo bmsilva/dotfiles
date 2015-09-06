@@ -4,7 +4,7 @@ call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 Helptags
 
-let mapleader="§"
+"let mapleader="§"
 
 set hidden      " Hides buffers instead of closing
 set nowrap      " don't wrap lines
@@ -35,7 +35,7 @@ set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " default listchars=eol:$
 if has('autocmd')
     autocmd filetype python,perl set expandtab
-    autocmd filetype html,xml set listchars-=tab:>.
+    "autocmd filetype html,xml set listchars-=tab:>.
 endif
 set pastetoggle=<F2>
 set ruler
@@ -57,6 +57,7 @@ nmap <silent> <C-n> :call SideNumberSwitch()<CR>
 
 nmap <silent> <Leader>h :nohlsearch<CR>
 nmap <silent> <Leader>b :BufExplorer<CR>
+nmap <silent> <Leader>p iimport pdb; pdb.set_trace()<ESC>
 
 if has("gui_running")
 "    set guifont=Monaco:h12
@@ -75,6 +76,7 @@ endif
 "
 " BMS maps
 "
+inoremap <silent> <C-d><C-d> import pdb; pdb.set_trace()
 nnoremap <M-Space> :NERDTreeToggle<cr>
 nnoremap <silent> <Leader>qs :call QuoteWord("'")<CR>
 nnoremap <silent> <Leader>qd :call QuoteWord('"')<CR>
@@ -202,3 +204,5 @@ if exists("+showtabline")
      set stal=2
      set tabline=%!MyTabLine()
 endif
+
+set tabstop=4
