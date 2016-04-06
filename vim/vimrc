@@ -8,15 +8,23 @@ Plug 'tpope/vim-surround'
 Plug 'mileszs/ack.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'mkitt/tabline.vim'
+Plug 'majutsushi/tagbar'
+Plug 'bling/vim-airline'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 " On-demand
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'bufexplorer.zip', { 'on':  'BufExplorer' }
 Plug 'kien/ctrlp.vim', { 'on':  'CtrlP' }
+Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
 
 call plug#end()
 
 " BMS =========================================================================
+let g:Powerline_symbols='fancy'
 
 set hidden      " Hides buffers instead of closing
 set nowrap      " don't wrap lines
@@ -57,16 +65,34 @@ set complete-=i
 set shortmess=at
 set cmdheight=2
 
+" Show the status line always
+set laststatus=2
+
 " Toggle column numbers
 set relativenumber
 nmap <silent> <C-n> :set invrelativenumber<CR>
 
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
 nmap <silent> <Leader>h :nohlsearch<CR>
 nmap <silent> <Leader>b :BufExplorer<CR>
+nmap <F8> :TagbarToggle<CR>
+nmap <F9> :GitGutterToggle<CR>
 
 iabbrev ipdb import ipdb; ipdb.set_trace()
 
-nnoremap <M-Space> :NERDTreeToggle<cr>
+" nnoremap <M-Space> :NERDTreeToggle<cr>
+nnoremap <M-Space> :NERDTreeTabsToggle<cr>
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -80,7 +106,7 @@ vnoremap <silent> <Leader>q[ di[<ESC>pa]<ESC>
 
 vnoremap <silent> <Leader>q{ di{<ESC>pa}<ESC>
 
-set bg=light
+set bg=dark
 colorscheme solarized
 
 let g:ctrlp_map = '<F3>'
@@ -89,3 +115,9 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:bufExplorerSortBy='fullpath'
 let g:bufExplorerSplitOutPathName=0
 let g:bufExplorerShowRelativePath=1
+
+autocmd Filetype html setlocal ts=2 sw=2 sts=2 expandtab
+autocmd Filetype htmldjango setlocal ts=2 sw=2 sts=2 expandtab
+autocmd Filetype python setlocal ts=4 sw=4 sts=4 expandtab
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=2 expandtab
+autocmd Filetype javascript.jsx setlocal ts=2 sw=2 sts=2 expandtab

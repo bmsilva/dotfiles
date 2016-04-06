@@ -2,10 +2,10 @@
 import os
 import subprocess
 
-print "TMUX: %s" % os.getenv("TMUX", "")
-print "SSH_TTY: %s" % os.getenv("SSH_TTY", "")
-print "SSH_AUTH_SOCK: %s" % os.getenv("SSH_AUTH_SOCK", "")
-print "HOME: %s" % os.getenv("HOME", "")
+print("TMUX: %s" % os.getenv("TMUX", ""))
+print("SSH_TTY: %s" % os.getenv("SSH_TTY", ""))
+print("SSH_AUTH_SOCK: %s" % os.getenv("SSH_AUTH_SOCK", ""))
+print("HOME: %s" % os.getenv("HOME", ""))
 
 if os.getenv("TMUX") is None:
     if os.getenv("SSH_TTY") is not None:
@@ -19,10 +19,10 @@ if os.getenv("TMUX") is None:
             os.symlink(os.getenv("SSH_AUTH_SOCK"), sock_file)
             os.environ['SSH_AUTH_SOCK'] = sock_file
 
-        try:
-            subprocess.check_call(["tmux", "attach-session", "-t", "sshwrap"])
-        except subprocess.CalledProcessError:
-            print "lets create session"
-            os.environ['STY'] = "tmux-sshwrap"
-            os.execlpe("tmux", "tmux", "new-session", "-s", "sshwrap",
-                       os.environ)
+    try:
+        subprocess.check_call(["tmux", "attach-session", "-t", "sshwrap"])
+    except subprocess.CalledProcessError:
+        print("lets create session")
+        os.environ['STY'] = "tmux-sshwrap"
+        os.execlpe("tmux", "tmux", "new-session", "-s", "sshwrap",
+                   os.environ)
