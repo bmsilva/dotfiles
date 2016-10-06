@@ -68,6 +68,10 @@ set cmdheight=2
 " Show the status line always
 set laststatus=2
 
+set list
+set listchars=eol:$,tab:→.,extends:»,precedes:«
+noremap <leader>lc :set list!<CR>
+
 " Toggle column numbers
 set relativenumber
 nmap <silent> <C-n> :set invrelativenumber<CR>
@@ -122,3 +126,14 @@ autocmd Filetype python setlocal ts=4 sw=4 sts=4 expandtab
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2 expandtab
 autocmd Filetype javascript.jsx setlocal ts=2 sw=2 sts=2 expandtab
 autocmd BufEnter * :syntax sync fromstart
+
+if has("gui_macvim")
+    " set macvim specific stuff
+    set macligatures
+    set guifont=Fira\ Code:h12
+endif
+
+" Also a possibility
+" if has("gui_running")
+"     " set macvim specific stuff
+" endif
