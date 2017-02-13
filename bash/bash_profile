@@ -26,3 +26,5 @@ if [[ -r $HOME/.${HOST_NICKNAME}_bash_profile ]]; then
 else
     echo "WARNING: Can't find custom bash_profile"
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
