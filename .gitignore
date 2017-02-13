@@ -38,4 +38,6 @@ nosetests.xml
 /vim/vim/.netrwhist
 /vim/vim/vimpyre/*
 /vim/vim/plugged
+/vim/vim/plugin/
 .DS_Store
+
