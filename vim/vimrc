@@ -15,9 +15,10 @@ Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'terryma/vim-multiple-cursors'
 
 " On-demand
-Plug 'bufexplorer.zip', { 'on':  'BufExplorer' }
+" Plug 'bufexplorer.zip', { 'on':  'BufExplorer' }
 Plug 'kien/ctrlp.vim', { 'on':  'CtrlP' }
 Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
 
@@ -74,7 +75,11 @@ noremap <leader>lc :set list!<CR>
 
 " Toggle column numbers
 set relativenumber
-nmap <silent> <C-n> :set invrelativenumber<CR>
+nmap <silent> <leader>n :set invrelativenumber<CR>
+
+" Set path to search in directory tree
+set path+=**
+set wildmenu
 
 " Go to tab by number
 noremap <leader>1 1gt
@@ -116,10 +121,17 @@ colorscheme solarized
 let g:ctrlp_map = '<F3>'
 let g:ctrlp_cmd = 'CtrlP'
 
-let g:bufExplorerSortBy='fullpath'
-let g:bufExplorerSplitOutPathName=0
-let g:bufExplorerShowRelativePath=1
+" let g:bufExplorerSortBy='fullpath'
+" let g:bufExplorerSplitOutPathName=0
+" let g:bufExplorerShowRelativePath=1
 
+" NETRW configuration
+let g:netrw_banner=0
+let g:netrw_browse_split=4
+let g:netrw_altv=1
+let g:netrw_liststyle=3
+
+autocmd Filetype yaml setlocal ts=2 sw=2 sts=2 expandtab
 autocmd Filetype html setlocal ts=2 sw=2 sts=2 expandtab
 autocmd Filetype htmldjango setlocal ts=2 sw=2 sts=2 expandtab
 autocmd Filetype python setlocal ts=4 sw=4 sts=4 expandtab
@@ -130,7 +142,7 @@ autocmd BufEnter * :syntax sync fromstart
 if has("gui_macvim")
     " set macvim specific stuff
     set macligatures
-    set guifont=Fira\ Code:h12
+    set guifont=Fira\ Code:h14
 endif
 
 " Also a possibility
