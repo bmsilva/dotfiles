@@ -9,18 +9,22 @@ Plug 'mileszs/ack.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'jistr/vim-nerdtree-tabs'
 Plug 'mkitt/tabline.vim'
 Plug 'majutsushi/tagbar'
 Plug 'bling/vim-airline'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'ryanss/vim-hackernews'
+Plug 'benmills/vimux'
+Plug 'ivanov/vim-ipython'
 
 " On-demand
 " Plug 'bufexplorer.zip', { 'on':  'BufExplorer' }
 Plug 'kien/ctrlp.vim', { 'on':  'CtrlP' }
 Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
+Plug 'scrooloose/syntastic', { 'for': 'python' }
 
 call plug#end()
 
@@ -56,6 +60,8 @@ set nowritebackup
 set nobackup
 set noswapfile
 
+set nocompatible
+
 set pastetoggle=<F2>
 set ruler
 
@@ -81,6 +87,16 @@ nmap <silent> <leader>n :set invrelativenumber<CR>
 set path+=**
 set wildmenu
 
+" Integration with tmux+iterm2
+" https://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
+set clipboard=unnamed
+
+" VimuxPromptCommand
+ map <Leader>vp :VimuxPromptCommand<CR>
+ map <Leader>vl :VimuxRunLastCommand<CR>
+ map <Leader>vi :VimuxInspectRunner<CR>
+ map <Leader>vz :VimuxZoomRunner<CR>
+
 " Go to tab by number
 noremap <leader>1 1gt
 noremap <leader>2 2gt
@@ -95,13 +111,15 @@ noremap <leader>0 :tablast<cr>
 
 nmap <silent> <Leader>h :nohlsearch<CR>
 nmap <silent> <Leader>b :BufExplorer<CR>
+nmap <silent> <Leader>j :%!python -m json.tool<CR>
+nmap <silent> <Leader>jd :%!python -c 'import sys, json; print(json.dumps(eval(sys.stdin.read()), indent=2))'<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :GitGutterToggle<CR>
 
 iabbrev ipdb import ipdb; ipdb.set_trace()
 
-" nnoremap <M-Space> :NERDTreeToggle<cr>
-nnoremap <M-Space> :NERDTreeTabsToggle<cr>
+nnoremap <M-Space> :NERDTreeToggle<cr>
+" nnoremap <M-Space> :NERDTreeTabsToggle<cr>
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -112,7 +130,6 @@ vnoremap <silent> <Leader>qs di'<ESC>pa'<ESC>
 vnoremap <silent> <Leader>qd di"<ESC>pa"<ESC>
 vnoremap <silent> <Leader>q( di(<ESC>pa)<ESC>
 vnoremap <silent> <Leader>q[ di[<ESC>pa]<ESC>
-
 vnoremap <silent> <Leader>q{ di{<ESC>pa}<ESC>
 
 set bg=dark
@@ -127,7 +144,7 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " NETRW configuration
 let g:netrw_banner=0
-let g:netrw_browse_split=4
+" let g:netrw_browse_split=4
 let g:netrw_altv=1
 let g:netrw_liststyle=3
 
@@ -149,3 +166,14 @@ endif
 " if has("gui_running")
 "     " set macvim specific stuff
 " endif
+
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
