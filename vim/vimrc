@@ -12,19 +12,21 @@ Plug 'scrooloose/nerdtree'
 " Plug 'jistr/vim-nerdtree-tabs'
 Plug 'mkitt/tabline.vim'
 Plug 'majutsushi/tagbar'
-Plug 'bling/vim-airline'
+" Plug 'bling/vim-airline', { 'on': 'AirlineToggle' }
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'ryanss/vim-hackernews'
 Plug 'benmills/vimux'
-Plug 'ivanov/vim-ipython'
+Plug 'nlknguyen/cloudformation-syntax.vim'
+Plug 'tpope/vim-unimpaired'
+Plug 'junegunn/vim-plug'
+Plug 'gregsexton/gitv'
 
 " On-demand
 " Plug 'bufexplorer.zip', { 'on':  'BufExplorer' }
 Plug 'kien/ctrlp.vim', { 'on':  'CtrlP' }
 Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
-Plug 'scrooloose/syntastic', { 'for': 'python' }
+" Plug 'scrooloose/syntastic', { 'for': 'python' }
 
 call plug#end()
 
@@ -72,9 +74,6 @@ set complete-=i
 set shortmess=at
 set cmdheight=2
 
-" Show the status line always
-set laststatus=2
-
 set list
 set listchars=eol:$,tab:→.,extends:»,precedes:«
 noremap <leader>lc :set list!<CR>
@@ -90,6 +89,9 @@ set wildmenu
 " Integration with tmux+iterm2
 " https://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
 set clipboard=unnamed
+
+" Make Gdiff split vertical
+" set diffopt+=vertical
 
 " VimuxPromptCommand
  map <Leader>vp :VimuxPromptCommand<CR>
@@ -117,6 +119,7 @@ nmap <F8> :TagbarToggle<CR>
 nmap <F9> :GitGutterToggle<CR>
 
 iabbrev ipdb import ipdb; ipdb.set_trace()
+iabbrev pdb import pdb; pdb.set_trace()
 
 nnoremap <M-Space> :NERDTreeToggle<cr>
 " nnoremap <M-Space> :NERDTreeTabsToggle<cr>
@@ -162,6 +165,11 @@ if has("gui_macvim")
     set guifont=Fira\ Code:h14
 endif
 
+set statusline=%<%f\ %h%m%r%{kite#statusline()}%=%-14.(%l,%c%V%)\ %P
+set laststatus=2  " always display the status line
+
+set completeopt-=preview  " Kite turn of preview screen
+
 " Also a possibility
 " if has("gui_running")
 "     " set macvim specific stuff
@@ -169,11 +177,11 @@ endif
 
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
